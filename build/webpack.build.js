@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const { CheckerPlugin } = require('awesome-typescript-loader')
 const Components = require('../components.json')
 
