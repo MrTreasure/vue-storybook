@@ -13,15 +13,33 @@ const env = process.env.NODE_ENV === 'testing'
   : { NODE_ENV: '"production"' }
 
 module.exports = {
-  entry: Components,
   mode: 'production',
+  entry: Components,
+  output: {
+    path: path.resolve(__dirname, '../lib'),
+    publicPath: '/dist/',
+    filename: '[name].js',
+    chunkFilename: '[id].js',
+    libraryTarget: 'umd'
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    modules: [
+      resolve('src'),
+      resolve('node_modules')
+    ],
+    alias: {
+      packages: path.resolve(__dirname, '../packages'),
+    }
+  },
   externals: {
     vue: {
       root: 'Vue',
       commonjs: 'vue',
       commonjs2: 'vue',
       amd: 'vue'
-    }
+    },
+    'element-ui': 'element-ui'
   },
   optimization: {
     minimize: false
@@ -51,7 +69,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.s(a|c)ss$/,
         use: [
             "style-loader",
             "css-loader",
@@ -69,22 +87,5 @@ module.exports = {
     new CheckerPlugin(),
     new ForkTsCheckerWebpackPlugin()
   ],
-  output: {
-    path: path.resolve(__dirname, '../lib'),
-    publicPath: '/dist/',
-    filename: '[name].js',
-    chunkFilename: '[id].js',
-    libraryTarget: 'commonjs2'
-  },
-  devtool: '#source-map',
-  resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    modules: [
-      resolve('src'),
-      resolve('node_modules')
-    ],
-    alias: {
-      packages: path.resolve(__dirname, '../packages'),
-    }
-  }
+  devtool: '#source-map'
 }

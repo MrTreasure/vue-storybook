@@ -5,6 +5,8 @@ import Welcome from './Welcome'
 import { linkTo } from '@storybook/addon-links'
 import { storiesOf } from '@storybook/vue'
 import HelloWorld from '../packages/HelloWorld/index'
+import Select from '../packages/Select/index'
+import 'element-ui/lib/theme-chalk/index.css'
 
 
 storiesOf("Welcome", module).add("to Storybook", () => ({
@@ -35,5 +37,23 @@ storiesOf("Button", module)
   .add("HelloWorld", () => ({
     components: { HelloWorld },
     template: `<HelloWorld/>`
+  }))
+  .add('ElSelect', () => ({
+    components: { Select },
+    data() {
+      return {
+        list: [
+          {
+            label: '1',
+            prop: 1
+          },
+          {
+            label: '2',
+            prop: 2
+          }
+        ]
+      }
+    },
+    template: `<Select :options="list"/>`
   }))
 /* eslint-enable react/react-in-jsx-scope */
